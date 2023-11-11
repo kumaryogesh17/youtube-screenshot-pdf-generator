@@ -1,0 +1,30 @@
+{
+  "name": "youtube screenshot",
+  "version": "0.1.0",
+  "description": "Take screenshot from youtube videos",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://*.youtube.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["Button.png"],
+      "matches": ["https://*.youtube.com/*"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+
+    },
+    "default_title": "youtube screenshot",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
+}
