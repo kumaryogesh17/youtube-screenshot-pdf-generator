@@ -15,7 +15,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["Button.png"],
+      "resources": ["Button.png","jspdf.min.js"],
       "matches": ["https://*.youtube.com/*"]
     }
   ],
