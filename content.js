@@ -128,5 +128,5 @@
     }
 
     newVideoLoaded();
-    setInterval(requestDataFromDB, 1000);
+    setInterval(requestDataFromDB, 2000);
 })();
