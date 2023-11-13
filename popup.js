@@ -1,10 +1,28 @@
+import { default as jsPDF } from "jspdf";
+
 document.addEventListener('DOMContentLoaded', function () {
     chrome.runtime.sendMessage({ type: 'popupMessage', data: 'Hello from popup!' });
+
+    const download = document.getElementById("downloadPDF");
+    if (download) {
+        download.addEventListener("click", downloadFunction);
+    } else {
+        console.error('Element with id "downloadPDF" was not found');
+    }
 });
+
+function downloadFunction() {
+    console.log("hello");
+    chrome.runtime.sendMessage({ type: 'downloadPDF' });
+}
+
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.type === 'SENDING-DB-DATA-TO-POPUP.JS') {
         //   console.log('Message received in background:', message.data);
+
+        const total = document.getElementById('totalData');
+        total.innerHTML = message.data.length;
 
         const screenshotContainer = document.getElementById("screenshotContainer");
 
@@ -23,3 +41,22 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         }
     }
 });
+
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.type === 'SENDING-DB-DATA-FOR-DOWNLOAD') {
+          console.log('Message received in background:', message.data);
+
+        const pdf = new jsPDF();
+
+        message.data.forEach((obj, index) => {
+            pdf.addImage(obj.imageData, 'JPEG', 0, 0);
+            if (index !== message.data.length - 1) {
+                pdf.addPage();
+            }
+        });
+
+        pdf.save("download.pdf");
+    }
+});
+ 
