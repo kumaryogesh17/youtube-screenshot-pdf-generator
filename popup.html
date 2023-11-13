@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>My Extension</title>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
   <style>
     body {
       height: 600px;
@@ -11,7 +12,10 @@
   </style>
 </head>
 <body>
+  <div id="totalData"></div>
+  <div id="downloadPDF">Download Pdf</div>
   <div id="screenshotContainer"></div>
   <script src="popup.js"></script>
+  <script src="dist/bundle.js"></script>
 </body>
 </html>
