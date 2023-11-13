@@ -7,18 +7,29 @@ chrome.tabs.onUpdated.addListener((tabId, tab) => {
       type: "NEW",
     });
   }
- 
+
 });
 
-// background.js
+let data = null;
+
 
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  if (message.type === "contentScriptMessage") {
-      // Handle the message from the content script
-      console.log("Message received in background:", message.data);
+  if (message.type === "SENDING-DB-DATA-TO-BACKGROUND-SCRIPT") {
+    // console.log("Message received in background:", message.data);
 
-      // Send a response back to the content script
-      sendResponse({ response: "Message received in the background script!" });
+    data = message.data;
+
+    // Send a response back to the content script
+    // sendResponse({ response: "Message received in the background script!" });
   }
 });
+
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  if (message.type === 'popupMessage') {
+    // console.log('Message received in background:', message.data);
+    chrome.runtime.sendMessage({ type: "SENDING-DB-DATA-TO-POPUP.JS", data: data });
+  }
+});
+
