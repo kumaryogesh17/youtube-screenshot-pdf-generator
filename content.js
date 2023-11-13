@@ -11,7 +11,7 @@
 
         request.onsuccess = function (event) {
             resolve(event.target.result);
-            console.log("Database Created");
+            // console.log("Database Created");
         };
 
         request.onerror = function (event) {
@@ -38,7 +38,6 @@
     // Function to get data from the IndexedDB
     function getDataFromDB() {
         return new Promise(function (resolve, reject) {
-            // Open a transaction to the database
             const transaction = dbPromise.then(db => {
                 const objectStore = db.transaction('ScreenshotData').objectStore('ScreenshotData');
 
@@ -116,21 +115,18 @@
 
         if (type === "NEW") {
             newVideoLoaded();
+            requestDataFromDB();
         }
     });
 
-    getDataFromDB().then((data) => {
-        console.log(data);
-        // Send a message to the background script
-        chrome.runtime.sendMessage({ type: "contentScriptMessage", data: data }, function (response) {
-            // Handle the response from the background script
-            if (response) {
-                console.log("Response received in content script:", response.response);
-            } else {
-                console.log("No response received from the background script.");
-            }
-        });
-    })
+    function requestDataFromDB(){
+        getDataFromDB().then((data) => {
+            chrome.runtime.sendMessage({ type: "SENDING-DB-DATA-TO-BACKGROUND-SCRIPT", data: data });
+        }).catch(error => {
+            console.error('An error occurred:', error);
+          });
+    }
 
     newVideoLoaded();
+    setInterval(requestDataFromDB, 1000);
 })();
