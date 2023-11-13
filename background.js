@@ -33,3 +33,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   }
 });
 
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  if (message.type === 'downloadPDF') {
+    // console.log('Message received in background:', message.data);
+    chrome.runtime.sendMessage({ type: "SENDING-DB-DATA-FOR-DOWNLOAD", data: data });
+  }
+});
