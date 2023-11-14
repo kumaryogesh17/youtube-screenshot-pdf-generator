@@ -1,21 +1,151 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>My Extension</title>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
   <style>
     body {
-      height: 600px;
-      width: 600px;
+      height: 400px;
+      width: 400px;
       text-align: center;
+      background-color: #212121;
+      color: white;
+      font-weight: bolder;
+    }
+
+    .DataContainer {
+      height: 50%;
+      width: 100%;
+    }
+
+    #downloadPDF {
+      margin-top: 30px;
+    }
+
+    button {
+      width: 10em;
+      position: relative;
+      height: 3.5em;
+      border: 3px ridge #149CEA;
+      outline: none;
+      background-color: transparent;
+      color: white;
+      transition: 1s;
+      border-radius: 0.3em;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 3%;
+      width: 95%;
+      height: 40%;
+      background-color: #212121;
+      transition: 0.5s;
+      transform-origin: center;
+    }
+
+    button::before {
+      content: "";
+      transform-origin: center;
+      position: absolute;
+      top: 80%;
+      left: 3%;
+      width: 95%;
+      height: 40%;
+      background-color: #212121;
+      transition: 0.5s;
+    }
+
+    button:hover::before,
+    button:hover::after {
+      transform: scale(0)
+    }
+
+    button:hover {
+      box-shadow: inset 0px 0px 25px #1479EA;
+    }
+
+    #headline {
+      margin-bottom: 20px;
+      font-size: 15px;
+      font-weight: bolder;
+      text-align: left;
+      padding-bottom: 10px;
+      position: relative;
+    }
+
+    #headline::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #1479EA, transparent);
+      background-size: 200% auto;
+      animation: move 1.5s infinite;
+    }
+
+    @keyframes move {
+      0% {
+        background-position: 100% 0;
+      }
+
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+    #total {
+      padding: 10px;
+      background-color: #212121;
+      color: whitesmoke;
+      font-size: 1.5em;
+      font-weight: bold;
+      border: 3px solid;
+      border-image: linear-gradient(90deg, transparent, #1479EA, transparent);
+      border-image-slice: 1;
+      animation: move 1.5s infinite;
+      margin-top: 20px;
+
+    }
+
+    @keyframes move {
+      0% {
+        border-image-source: linear-gradient(90deg, transparent, #1479EA, transparent);
+      }
+
+      50% {
+        border-image-source: linear-gradient(90deg, #1479EA, transparent, #1479EA);
+      }
+
+      100% {
+        border-image-source: linear-gradient(90deg, transparent, #1479EA, transparent);
+      }
+    }
+
+    #totalData {
+      color: whitesmoke;
     }
   </style>
 </head>
+
 <body>
-  <div id="totalData"></div>
-  <div id="downloadPDF">Download Pdf</div>
-  <div id="screenshotContainer"></div>
+  <div class="toggleContainer">
+    <div class="DataContainer">
+      <div id="total">Total Screenshot: <span id="totalData"></span></div>
+      <button id="downloadPDF">Download Pdf</button>
+    </div>
+    <div id="headline">Screenshots:</div>
+    <div id="screenshotContainer">Screenshot Container</div>
+  </div>
   <script src="popup.js"></script>
   <script src="dist/bundle.js"></script>
 </body>
+
 </html>
