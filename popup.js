@@ -49,11 +49,13 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message && message.type === 'SENDING-DB-DATA-FOR-DOWNLOAD' && message.data) {
         console.log('Message received in background:', message.data);
 
-        const pdf = new jsPDF();
+        const pdf = new jsPDF('l','mm','a4');
+        const width = pdf.internal.pageSize.getWidth();
+        const height = pdf.internal.pageSize.getHeight();
 
         message.data.forEach((obj, index) => {
             if (obj && obj.imageData) {
-                pdf.addImage(obj.imageData, 'JPEG', 0, 0);
+                pdf.addImage(obj.imageData, 'JPEG', 0, 0, width,height);
                 if (index !== message.data.length - 1) {
                     pdf.addPage();
                 }
