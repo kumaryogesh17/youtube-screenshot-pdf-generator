@@ -22,7 +22,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         //   console.log('Message received in background:', message.data);
 
         const total = document.getElementById('totalData');
-        total.innerHTML = message.data.length;
+        if (total) {
+            total.innerHTML = message.data.length;
+        }
 
         const screenshotContainer = document.getElementById("screenshotContainer");
 
@@ -44,19 +46,21 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.type === 'SENDING-DB-DATA-FOR-DOWNLOAD') {
-          console.log('Message received in background:', message.data);
+    if (message && message.type === 'SENDING-DB-DATA-FOR-DOWNLOAD' && message.data) {
+        console.log('Message received in background:', message.data);
 
         const pdf = new jsPDF();
 
         message.data.forEach((obj, index) => {
-            pdf.addImage(obj.imageData, 'JPEG', 0, 0);
-            if (index !== message.data.length - 1) {
-                pdf.addPage();
+            if (obj && obj.imageData) {
+                pdf.addImage(obj.imageData, 'JPEG', 0, 0);
+                if (index !== message.data.length - 1) {
+                    pdf.addPage();
+                }
             }
         });
 
         pdf.save("download.pdf");
     }
 });
- 
+
