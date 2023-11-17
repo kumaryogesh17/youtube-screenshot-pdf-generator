@@ -19,27 +19,41 @@ function downloadFunction() {
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.type === 'SENDING-DB-DATA-TO-POPUP.JS') {
-        //   console.log('Message received in background:', message.data);
-
         const total = document.getElementById('totalData');
+        const screenshotContainer = document.getElementById("screenshotContainer");
+        const dataContainer = document.querySelector('.DataContainer');
+        const headline = document.getElementById('headline');
+
         if (total) {
             total.innerHTML = message.data.length;
         }
 
-        const screenshotContainer = document.getElementById("screenshotContainer");
-
         if (screenshotContainer) {
             screenshotContainer.innerHTML = '';
 
-            message.data.forEach((obj, index) => {
-                const newImage = document.createElement('img');
-                newImage.src = obj.imageData;
-                newImage.style.width = '200px';
-                newImage.style.height = '200px';
-                newImage.alt = `Image ${index + 1}`;
+            if (message.data.length === 0) {
+                const newCard = document.createElement('div');
+                newCard.textContent = 'No screenshots available. Please use the Add button to capture a new screenshot.';
+                screenshotContainer.appendChild(newCard);
 
-                screenshotContainer.appendChild(newImage);
-            });
+                // Hide DataContainer and headline
+                if (dataContainer) dataContainer.style.display = 'none';
+                if (headline) headline.style.display = 'none';
+            } else {
+                // Show DataContainer and headline
+                if (dataContainer) dataContainer.style.display = 'block';
+                if (headline) headline.style.display = 'block';
+
+                message.data.forEach((obj, index) => {
+                    const newImage = document.createElement('img');
+                    newImage.src = obj.imageData;
+                    newImage.style.width = '200px';
+                    newImage.style.height = '200px';
+                    newImage.alt = `Image ${index + 1}`;
+
+                    screenshotContainer.appendChild(newImage);
+                });
+            }
         }
     }
 });
