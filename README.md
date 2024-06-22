@@ -7,8 +7,7 @@ This project is a Chrome extension that allows users to take screenshots of YouT
 ## Features
 
 - **Easy to Use**: Simply click the screenshot button added to the YouTube video player controls to capture the current frame.
-- **High-Quality Screenshots**: Captures screenshots in PNG format for high-quality images.
-- **Instant Download**: Automatically downloads the captured screenshot to your device.
+- **Instant Download**: Automatically downloads the captured screenshots as pdf to your device.
 
 ## Installation
 
@@ -30,4 +29,4 @@ This project is a Chrome extension that allows users to take screenshots of YouT
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## made by @kumaryogesh17
+## made by [@kumaryogesh17](https://github.com/kumaryogesh17)
