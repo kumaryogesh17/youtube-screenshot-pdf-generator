@@ -1,20 +1,23 @@
 # YouTube Screenshot Chrome Extension
 
-This is a Chrome extension that allows users to take screenshots of YouTube videos and save them as a PDF.
+## Description
+
+This project is a Chrome extension that allows users to take screenshots of YouTube videos directly from the video player. It adds a screenshot button to the YouTube video player controls, enabling users to capture and save images from videos with ease and user can convert screenshots into pdf.
 
 ## Features
 
-- Take screenshots of YouTube videos
-- View screenshots in a popup
-- Download screenshots as a PDF
+- **Easy to Use**: Simply click the screenshot button added to the YouTube video player controls to capture the current frame.
+- **High-Quality Screenshots**: Captures screenshots in PNG format for high-quality images.
+- **Instant Download**: Automatically downloads the captured screenshot to your device.
 
 ## Installation
 
 1. Clone this repository: `git clone https://github.com/kumaryogesh17/youtube-screenshot-pdf-generator`
+2. run `npm run dev`
 2. Open Chrome and go to `chrome://extensions`
 3. Enable "Developer mode"
 4. Click on "Load unpacked"
-5. Select the directory of the cloned repository
+5. Select the dist directory from the cloned repository
 
 ## Usage
 
@@ -27,6 +30,4 @@ This is a Chrome extension that allows users to take screenshots of YouTube vide
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+## made by @kumaryogesh17
