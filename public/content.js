@@ -98,11 +98,7 @@
 
         if (!checkButtonAlreadyCreated) {
             const screenshotButton = document.createElement('div');
-            screenshotButton.innerHTML = '<svg class="w-[48px] h-[48px] mt-7 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14m-7 7V5"/></svg>';
-
-
-
-            
+            screenshotButton.innerHTML = '<svg class="w-[48px] h-[48px] mt-7 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14m-7 7V5"/></svg>';            
             screenshotButton.className = "ytp-button " + "screenshot-btn " + "ytp-miniplayer-button";
             youtubeLeftControls = document.getElementsByClassName("ytp-left-controls")[0];
             youtubeLeftControls.appendChild(screenshotButton);
@@ -122,7 +118,7 @@
     function requestDataFromDB(){
         getDataFromDB().then((data) => {
             chrome.runtime.sendMessage({ type: "SENDING-DB-DATA-TO-BACKGROUND-SCRIPT", data: data });
-            console.log("Data sent to background script");
+            // console.log("Data sent to background script");
         }).catch(error => {
             console.error('An error occurred:', error);
           });
